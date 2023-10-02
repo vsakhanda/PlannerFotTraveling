@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.Route;
+import com.planner.travel.entity.Route;
 
 public interface RouteService {
 

@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.User;
+import com.planner.travel.entity.User;
 
 public interface UserService {
 

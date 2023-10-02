@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.Point;
+import com.planner.travel.entity.Point;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 public class PointServiceImpl implements PointService{
 
 
-    private Map<Integer, Point> points = new HashMap<>();
+    private final Map<Integer, Point> points = new HashMap<>();
 
     // DAO layer 48.44
     @Override

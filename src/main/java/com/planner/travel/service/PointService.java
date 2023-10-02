@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.Point;
+import com.planner.travel.entity.Point;
 
 public interface PointService {
 

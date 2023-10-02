@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.Route;
+import com.planner.travel.entity.Route;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 public class RouteServiceImpl implements RouteService{
 
 
-    private Map<Integer, Route> routes = new HashMap<>();
+    private final Map<Integer, Route> routes = new HashMap<>();
 
     // DAO layer 48.44
     @Override

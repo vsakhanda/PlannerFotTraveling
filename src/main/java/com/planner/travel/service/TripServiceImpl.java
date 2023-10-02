@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.Trip;
+import com.planner.travel.entity.Trip;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 @Service
 public class TripServiceImpl implements TripService{
 
-        private Map<Integer, Trip> trips = new HashMap<>();
+        private final Map<Integer, Trip> trips = new HashMap<>();
 
         // DAO layer 48.44
         @Override

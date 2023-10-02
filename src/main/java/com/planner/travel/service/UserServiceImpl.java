@@ -1,6 +1,6 @@
 package com.planner.travel.service;
 
-import com.planner.travel.model.User;
+import com.planner.travel.entity.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService{
 
 
-    private Map<Integer, User> users = new HashMap<>();
+    private final Map<Integer, User> users = new HashMap<>();
 
     // DAO layer 48.44
     @Override
@@ -20,18 +20,18 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User add(User user) {
-        users.put(user.getId(), user);
+        users.put(Math.toIntExact(user.getId()), user);
         return user;
     }
 
     @PostConstruct
     public void init() {
         User sergij = User.builder()
-                .id(1)
+                .id(1L)
                 .name("Serhij")
                 .build();
         User vlad = User.builder()
-                .id(2)
+                .id(2L)
                 .name("Vlad")
                 .build();
         users.put(1, sergij);
