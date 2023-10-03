@@ -15,7 +15,7 @@ public class UserMapper {
         dto.setSurname(user.getSurname());
         dto.setPhone(user.getPhone());
         dto.setCountry(user.getCountry());
-        dto.setCity(user.getPhone());
+        dto.setCity(user.getCity());
         // Перетворення інших полів за потребою
 
 
@@ -30,7 +30,7 @@ public class UserMapper {
         user.setSurname(userDTO.getSurname());
         user.setPhone(userDTO.getPhone());
         user.setCountry(userDTO.getCountry());
-        user.setCity(userDTO.getPhone());
+        user.setCity(userDTO.getCity());
 
         // Перетворення інших полів за потребою
         return user;

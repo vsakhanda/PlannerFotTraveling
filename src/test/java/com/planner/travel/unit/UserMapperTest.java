@@ -71,12 +71,13 @@ public class UserMapperTest {
         assertEquals("Example.com", user.getSurname());
         assertEquals("050505050505", user.getPhone());
         assertEquals("Japan", user.getCountry());
-        assertEquals("Kyiv", user.getCity());
+        assertEquals("Tokyo", user.getCity());
 
      //   assertEquals(Date.valueOf("01/01/1995"), user.getDob());
     }
 
 
-
+//mapconstruct
+    //annotation processor
 
 }
