@@ -2,9 +2,11 @@ package com.planner.travel.utils;
 
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
+import org.springframework.stereotype.Component;
 
 // Отримуємо всю інформацію про користувача
 
+@Component
 public class UserMapper {
 
     public UserDTO toDTO(User user) {
