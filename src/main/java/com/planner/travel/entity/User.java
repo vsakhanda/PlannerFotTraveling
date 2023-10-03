@@ -1,6 +1,5 @@
 package com.planner.travel.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -44,7 +43,6 @@ public class User implements Serializable {
 //                    )
 //            }
 //    )
-    @JsonIgnore
     private int Role;
 
 }

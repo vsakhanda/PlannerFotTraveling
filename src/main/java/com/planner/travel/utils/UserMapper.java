@@ -12,15 +12,12 @@ public class UserMapper {
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
         dto.setName(user.getName());
+        dto.setSurname(user.getSurname());
+        dto.setPhone(user.getPhone());
+        dto.setCountry(user.getCountry());
+        dto.setCity(user.getPhone());
         // Перетворення інших полів за потребою
 
-//       (1L, user.getId());
-//      ("test@example.com", user.getEmail());
-//      "ALEX", user.getName());
-//      s("Example.com", user.getSurname());
-//     s("070707070707", user.getPhone());
-//       ("Japan", user.getCountry());
-//       "Tokyo", user.getCity());
 
         return dto;
     }
@@ -30,6 +27,11 @@ public class UserMapper {
         user.setId(userDTO.getId());
         user.setEmail(userDTO.getEmail());
         user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setPhone(userDTO.getPhone());
+        user.setCountry(userDTO.getCountry());
+        user.setCity(userDTO.getPhone());
+
         // Перетворення інших полів за потребою
         return user;
     }
