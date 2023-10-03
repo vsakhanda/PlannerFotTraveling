@@ -1,26 +1,21 @@
-package com.planner.travel.entity;
+package com.planner.travel.dto;
 
-
-import jakarta.persistence.*;
 import lombok.*;
+
+// Отримуємо всю інформацію про Подорож
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@Entity
-@Table
-public class Trip {
+@ToString
+public class TripDTO {
 
-    @Column
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String author;
     private String description;
     private String datetime;
     private String is_completed;
-
 }

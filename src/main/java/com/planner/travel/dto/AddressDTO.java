@@ -1,7 +1,5 @@
-package com.planner.travel.entity;
+package com.planner.travel.dto;
 
-
-import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,13 +7,11 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@Entity
-@Table
-public class Address {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//Отримуємо інформацію про адресу точки
+
+public class AddressDTO {
+
     private int id;
     private String counrty;
     private String city;
