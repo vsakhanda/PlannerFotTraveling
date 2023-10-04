@@ -1,4 +1,4 @@
-package com.planner.travel.repository;
+package com.planner.travel.dao;
 
 /*
 JpaRepository: Цей інтерфейс наслідується від CrudRepository
@@ -12,9 +12,20 @@ JpaRepository надає методи, такі як saveAll(), flush(), deleteI
 
 import com.planner.travel.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 import java.util.Optional;
 
-public interface UserJpaRepository extends JpaRepository<User, Long> {
+public interface UserDAO extends JpaRepository<User, Long> {
 
+    List<User> findByNameContaining(String nameFragment);
+
+
+    List<User> findByName(String name);
+
+    @Query("SELECT u FROM User u WHERE u.email = ?1")
     Optional<User> findByEmail(String email);
+
+
 }

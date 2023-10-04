@@ -18,6 +18,33 @@ public class RouteController {
         this.rservice = rservice;
     }
 
+    // POST Додавання маршрутів. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
+    @PostMapping("/requestBody")
+    public ResponseEntity<Route> postUser(@RequestBody Route route) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(rservice.add(route));
+    }
+
+    // GET Отримання інформації про точку за її ID
+    @GetMapping("/requestparameter")
+    public ResponseEntity<Route> getByRequestParam(@RequestParam("routeId") int routeId) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(rservice.getById(routeId));
+    }
+
+    // GET Отримання інформації про коритувача з описом інформації з URL
+    @GetMapping("/parameter/{routeId}")
+    public ResponseEntity<Route> getParameter(@PathVariable("routeId") int routeId) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(rservice.getById(routeId));
+    }
+
+    // PUT
+    // Оновлення даних про маршрут
+
+    // PATCH
+    // Оновлення даних про точки маршруту
+
+
+    // ***********
+    // Тестові методи для перевірки рольової моделі
     @GetMapping("/admin")
     public String getAdminInfo() {
         return "Hello admin";
@@ -33,19 +60,5 @@ public class RouteController {
         return "Public info - hello java world!";
     }
 
-    @GetMapping("/parameter/{userId}")
-    public ResponseEntity<Route> getParameter(@PathVariable("userId") int routeId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(rservice.getById(routeId));
-    }
 
-    @GetMapping("/requestparameter")
-    public ResponseEntity<Route> getByRequestParam(@RequestParam("routeId") int routeId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(rservice.getById(routeId));
-    }
-
-    @PostMapping("/requestBody")
-    public ResponseEntity<Route> postUser(@RequestBody Route route) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(rservice.add(route));
-
-    }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RoadMapperTest {
+public class RouteMapperTest {
 
 
     private RouteMapper routeMapper;
@@ -30,7 +30,7 @@ public class RoadMapperTest {
 
         //Перевірка
         assertEquals(1, dto.getId());
-        assertEquals("Trip1", dto.getName());
+        assertEquals("Route1", dto.getName());
 
 
     }
@@ -47,7 +47,7 @@ public class RoadMapperTest {
 
         // Перевірка
         assertEquals(1, trip.getId());
-        assertEquals("Trip2", trip.getName());
+        assertEquals("Route2", trip.getName());
 
     }
 

@@ -3,13 +3,12 @@ package com.planner.travel.service;
 import com.planner.travel.customException.CustomException;
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
-import com.planner.travel.repository.UserJpaRepository;
+import com.planner.travel.dao.UserDAO;
 import com.planner.travel.utils.UserMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
-    private final UserJpaRepository userRepository;
+    private final UserDAO userRepository;
     private final UserMapper userMapper;
 
 
-    public UserServiceImpl(UserJpaRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserDAO userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }

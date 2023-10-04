@@ -19,8 +19,6 @@ public class UserMapper {
         dto.setCountry(user.getCountry());
         dto.setCity(user.getCity());
         // Перетворення інших полів за потребою
-
-
         return dto;
     }
 

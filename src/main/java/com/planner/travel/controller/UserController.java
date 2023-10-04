@@ -20,36 +20,63 @@ public class UserController {
         this.service = service;
     }
 
+    // POST Додавання користувача. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
+
+    @PostMapping("/requestBody")
+    public ResponseEntity<User> postUser(@RequestBody User user) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.add(user));
+    }
+
+    // GET Отримання інформації про коритувача
+    @GetMapping("/parameter/{userId}")
+    public ResponseEntity<User> getParameter(@PathVariable("userId") int userId) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.getById(userId));
+    }
+
+    // GET Отримання інформації про коритувача з описом інформації з URL
+    @GetMapping("/requestparameter")
+    public ResponseEntity<User> getByRequestParam(@RequestParam("userId") int userId) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.getById(userId));
+    }
+
+    // PATCH Оновлення інформації про користувача
+    // Оноалення даємо лише АДМІНУ
+    // @PreAuthorize("hasRole('ADMIN')")
+
+    // DELETE - Видалення коритсувача за ID (встановлення відмітки про видалення)
+    // Оноалення даємо лише АДМІНУ
+    // @PreAuthorize("hasRole('ADMIN')")
+
+    // FindALL  - отримання інформації про всіх користувачів
+    // Оноалення даємо лише АДМІНУ
+    // @PreAuthorize("hasRole('ADMIN')")
+
+
+    // ***********
+    // Тестові методи для перевірки рольової моделі
+    // Метод, що віддає інформамію лише Адміну
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public String getAdminInfo() {
         return "Hello admin";
     }
 
+    // Метод, що віддає інформамію для користувача
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/info")
     public String getUser() {
         return "Hello user";
     }
 
+    // Метод, що віддає інформамію всім.
     @GetMapping("/public")
     public String publicinfo() {
         return "Public info - hello java world!";
     }
 
-    @GetMapping("/parameter/{userId}")
-    public ResponseEntity<User> getParameter(@PathVariable("userId") int userId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.getById(userId));
-    }
+    // ************
 
-    @GetMapping("/requestparameter")
-    public ResponseEntity<User> getByRequestParam(@RequestParam("userId") int userId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.getById(userId));
-    }
 
-    @PostMapping("/requestBody")
-    public ResponseEntity<User> postUser(@RequestBody User user) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.add(user));
 
-    }
+
 }

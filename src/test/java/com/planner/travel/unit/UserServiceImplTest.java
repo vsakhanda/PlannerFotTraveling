@@ -2,7 +2,7 @@ package com.planner.travel.unit;
 
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
-import com.planner.travel.repository.UserJpaRepository;
+import com.planner.travel.dao.UserDAO;
 import com.planner.travel.service.UserServiceImpl;
 import com.planner.travel.utils.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ public class UserServiceImplTest {
       Наприклад, якщо ви маєте @Mock private SomeClass someClass;, то MockitoAnnotations.openMocks(this); ініціалізує цей мок для вас.
       */
     @Mock
-    private UserJpaRepository userRepository;
+    private UserDAO userRepository;
 
     /*
     Ця анотація дозволяє створювати "шпигунів" на реальних об'єктах. Коли ви створюєте шпигуна на реальному об'єкті,
