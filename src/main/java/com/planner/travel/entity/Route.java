@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table
+@Table (name = "routes")
 public class Route {
 
     @Column

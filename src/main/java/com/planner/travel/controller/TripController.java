@@ -43,7 +43,7 @@ public class TripController {
 
     // PATCH Оновлення даних про попотчиків
 
-    // PATCH 
+    // PATCH
 
 
 

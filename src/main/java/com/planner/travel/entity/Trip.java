@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table
+@Table (name = "trips")
 public class Trip {
 
     @Column

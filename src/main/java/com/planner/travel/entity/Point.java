@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table
+@Table (name = "points")
     public class Point implements Serializable {
 
     @Column

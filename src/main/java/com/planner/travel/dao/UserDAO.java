@@ -11,12 +11,14 @@ JpaRepository надає методи, такі як saveAll(), flush(), deleteI
  */
 
 import com.planner.travel.entity.User;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
 
+@Primary
 public interface UserDAO extends JpaRepository<User, Long> {
 
     List<User> findByNameContaining(String nameFragment);
