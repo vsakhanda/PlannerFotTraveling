@@ -10,9 +10,5 @@ class TravelApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void testCreateUser(){
-
-    }
 
 }
