@@ -22,8 +22,13 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public UserDTO findById(Integer id) {
-        return userMapper.toDTO(userDAO.findById(id));
+    public UserDTO findUserById(Integer id) {
+        return userMapper.toDTO(userDAO.findUserById(id));
+    }
+
+    @Override
+    public Optional<UserDTO> getById(int userId) {
+        return Optional.empty();
     }
 
     public UserServiceImpl(UserDAOImpl userDAOImpl, UserMapper userMapper) {
@@ -32,22 +37,23 @@ public class UserServiceImpl implements UserService{
     }
 
 //    private final Map<Integer, User> users = new HashMap<>();
-
+//
     private final Map<Integer, User> users = new HashMap<>();
-
-
-
 
     @Transactional
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        System.out.println("UserServiceImplementation - createUser method - 3");
-        User user = userMapper.toEntity(userDTO);
-        System.out.println("UserServiceImplementation - toEntity works - 4");
-        user = userDAO.save(user);
-        System.out.println("UserServiceImplementation - toDAO works - 5");
-        return userMapper.toDTO(user);
+    public User createUser(User user) {
+        User createdUser = userDAO.createUserDAO(user);
+        return createdUser;
     }
+
+//        System.out.println("UserServiceImplementation - createUser method - 3");
+//        User user = userMapper.toEntity(userDTO);
+//        System.out.println("UserServiceImplementation - toEntity works - 4");
+//        user = userDAO.createUserDAO(user);
+//        System.out.println("UserServiceImplementation - toDAO works - 5");
+//        return userMapper.toDTO(userDAO.createUserDAO(user));
+
 
     @Override
     public Optional<UserDTO> getUser(int id) {
@@ -92,10 +98,7 @@ public class UserServiceImpl implements UserService{
     }
 
     // DAO layer 48.44
-    @Override
-    public Optional<UserDTO> getById(int userId) {
-        return Optional.ofNullable(userMapper.toDTO(userDAO.findById(userId)));
-    }
+
 
 
     // метод додавання користувача

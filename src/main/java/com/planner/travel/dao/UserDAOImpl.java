@@ -10,10 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -24,40 +21,83 @@ public class UserDAOImpl implements UserDAO{
     private final Connection connection;
 
     public UserDAOImpl() throws SQLException {
-        this.connection = DatabaseConnection.getInstance().getConnection();;
+        this.connection = DatabaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public User findById(Integer id) {
+    public User findUserById(Integer id) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_FIND_BY_ID.getQueryName())) {
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            User user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setName(resultSet.getString("name"));
-            user.setSurname(resultSet.getString("surname"));
-            return user;
-
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException();
         }
+        return null;
     }
 
+
     @Override
-    public User save(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_INSERT.getQueryName())) {
+    public User createUserDAO(User user) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_INSERT.getQueryName(), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getCountry());
             preparedStatement.setString(6, user.getCity());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Користувача додано до бази даних.");
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    long userId = generatedKeys.getLong(1);
+                    user.setId((int) userId); // Встановлюємо згенерований ID користувача в об'єкт User
+                    System.out.println("Згенерований ID користувача: " + userId);
+                }
+            } else {
+                System.out.println("Не вдалося додати користувача до бази даних.");
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
-        return null;
+        return user;
     }
+
+//    @Override
+//    public User createUserDAO(User user) {
+//
+//
+//
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_INSERT.getQueryName(), PreparedStatement.RETURN_GENERATED_KEYS)) {
+//            preparedStatement.setString(1, user.getName());
+//            preparedStatement.setString(2, user.getSurname());
+//            preparedStatement.setString(3, user.getPhone());
+//            preparedStatement.setString(4, user.getEmail());
+//            preparedStatement.setString(5, user.getCountry());
+//            preparedStatement.setString(6, user.getCity());
+//            int rowsAffected = preparedStatement.executeUpdate();
+//            if (rowsAffected > 0) {
+//                System.out.println("Користувача додано до бази даних.");
+//                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+//                if (generatedKeys.next()) {
+//                    long userId = generatedKeys.getInt(1);
+//                    System.out.println("Згенерований ID користувача: " + userId);
+//                }
+//            } else {
+//                System.out.println("Не вдалося додати користувача до бази даних.");
+//            }
+//        } catch (SQLException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        return user;
+//    }
+
+
+
+
+
+
+
 
     @Override
     public List<User> findByNameContaining(String nameFragment) {
@@ -161,6 +201,10 @@ public class UserDAOImpl implements UserDAO{
     }
 
 
+    @Override
+    public <S extends User> S save(S entity) {
+        return null;
+    }
 
     @Override
     public <S extends User> List<S> saveAll(Iterable<S> entities) {

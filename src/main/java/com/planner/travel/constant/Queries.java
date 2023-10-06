@@ -8,7 +8,7 @@ public enum Queries {
 
     // Додавання користувача POST
     USER_INSERT ("INSERT INTO users " +
-            "( name, surname, phone, email, country, city ) VALUES (?, ?, ?, ?, ?, ?); "),
+            "(name, surname, phone, email, country, city ) VALUES (?, ?, ?, ?, ?, ?); "),
 
     // Оновлення даних користувача PATCH
     USER_UPDATE("UPDATE users SET name = ?, surname = ?, WHERE id = ?"),

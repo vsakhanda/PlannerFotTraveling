@@ -1,6 +1,9 @@
 package com.planner.travel.controller;
 
+import com.planner.travel.dao.UserDAO;
+import com.planner.travel.dao.UserDAOImpl;
 import com.planner.travel.dto.UserDTO;
+import com.planner.travel.entity.User;
 import com.planner.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +26,20 @@ public class UserController {
     // POST Додавання користувача. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
 
     @PostMapping("/requestBody")
-    public ResponseEntity<UserDTO> postUser(@RequestBody UserDTO userDTO) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.createUser(userDTO));
+    public ResponseEntity<User> createUser (@RequestBody User user) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.createUser(user));
     }
 
     // GET Отримання інформації про коритувача
     @GetMapping("/getDirectUser/{userId}")
     public ResponseEntity<UserDTO> getUser(@PathVariable("userId") int userId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.findById(userId));
+        return ResponseEntity.ok(service.findUserById(userId));
     }
 
     // GET Отримання інформації про коритувача з описом інформації з URL
     @GetMapping("/getUser")
     public ResponseEntity<UserDTO> getUserByRequestParam(@RequestParam("userId") int userId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(service.findById(userId));
+        return ResponseEntity.ok(service.findUserById(userId));
     }
 
     // PATCH Оновлення інформації про користувача

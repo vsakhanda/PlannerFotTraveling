@@ -11,11 +11,12 @@ public interface UserService {
 
     // Додавання користувача
 
-    UserDTO createUser(UserDTO userDTO);
+    User createUser(User user);
 
-    UserDTO findById(Integer id);
+    UserDTO findUserById(Integer id);
 
 
+    List<UserDTO> findAllUsers();
 
     Optional<UserDTO> getById(int userId);
 
@@ -27,7 +28,7 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    List<UserDTO> findAllUsers();
+
 
     User getById(Integer id); // must be DTO
 

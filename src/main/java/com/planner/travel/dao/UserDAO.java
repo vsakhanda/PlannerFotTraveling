@@ -22,9 +22,9 @@ import java.util.Optional;
 public interface UserDAO extends JpaRepository<User, Long> {
 
 
-    User findById(Integer id);
+    User findUserById(Integer id);
 
-    User save(User user);
+    User createUserDAO(User user);
 
     List<User> findByNameContaining(String nameFragment);
 
