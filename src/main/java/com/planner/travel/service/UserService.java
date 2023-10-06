@@ -9,19 +9,31 @@ import java.util.Optional;
 
 public interface UserService {
 
+    // Додавання користувача
 
     UserDTO createUser(UserDTO userDTO);
 
-    Optional<UserDTO> getUser(Long id);
+    UserDTO findById(Integer id);
 
-    UserDTO updateUser(Long id, UserDTO userDTO);
+
+
+    Optional<UserDTO> getById(int userId);
+
+    Optional<UserDTO> getUser(int id);
+
+    UserDTO updateUser(int id, UserDTO userDTO);
+
+    void deleteUser(int id);
 
     void deleteUser(Long id);
 
     List<UserDTO> findAllUsers();
 
-    User getById(int id); // must be DTO
+    User getById(Integer id); // must be DTO
+
+    // DAO layer 48.44
+
 
     //  UserDTO findById(Integer id); - повинна бути реалізація
-    User add(User user);
+
 }

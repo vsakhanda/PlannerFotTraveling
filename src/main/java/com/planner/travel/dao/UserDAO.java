@@ -21,8 +21,12 @@ import java.util.Optional;
 @Primary
 public interface UserDAO extends JpaRepository<User, Long> {
 
-    List<User> findByNameContaining(String nameFragment);
 
+    User findById(Integer id);
+
+    User save(User user);
+
+    List<User> findByNameContaining(String nameFragment);
 
     List<User> findByName(String name);
 
@@ -30,4 +34,5 @@ public interface UserDAO extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
 
+    boolean existsById(int id);
 }

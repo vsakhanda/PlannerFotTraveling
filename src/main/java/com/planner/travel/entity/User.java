@@ -12,20 +12,21 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
+@ToString
+@Data
 @Table (name = "users")
 public class User implements Serializable {
 
-    @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String name;
     private String surname;
-    private String email;
     private String phone;
+    private String email;
     private String country;
     private String city;
-    private Date dob;
+
 
 //    @ManyToMany
 //    @JoinTable(
@@ -43,6 +44,4 @@ public class User implements Serializable {
 //                    )
 //            }
 //    )
-    private int Role;
-
 }

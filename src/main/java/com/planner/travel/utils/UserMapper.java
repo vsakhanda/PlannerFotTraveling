@@ -10,30 +10,30 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
 
     public UserDTO toDTO(User user) {
-        UserDTO dto = new UserDTO();
-        dto.setId(user.getId());
-        dto.setEmail(user.getEmail());
-        dto.setName(user.getName());
-        dto.setSurname(user.getSurname());
-        dto.setPhone(user.getPhone());
-        dto.setCountry(user.getCountry());
-        dto.setCity(user.getCity());
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setName(user.getName());
+        userDTO.setSurname(user.getSurname());
+        userDTO.setPhone(user.getPhone());
+        userDTO.setCountry(user.getCountry());
+        userDTO.setCity(user.getCity());
         // Перетворення інших полів за потребою
-        return dto;
+        return userDTO;
     }
 
     public User toEntity(UserDTO userDTO) {
-        User user = new User();
-        user.setId(userDTO.getId());
-        user.setEmail(userDTO.getEmail());
-        user.setName(userDTO.getName());
-        user.setSurname(userDTO.getSurname());
-        user.setPhone(userDTO.getPhone());
-        user.setCountry(userDTO.getCountry());
-        user.setCity(userDTO.getCity());
+        User users = new User();
+        users.setId(userDTO.getId());
+        users.setEmail(userDTO.getEmail());
+        users.setName(userDTO.getName());
+        users.setSurname(userDTO.getSurname());
+        users.setPhone(userDTO.getPhone());
+        users.setCountry(userDTO.getCountry());
+        users.setCity(userDTO.getCity());
 
         // Перетворення інших полів за потребою
-        return user;
+        return users;
     }
 
 }

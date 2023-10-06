@@ -1,11 +1,11 @@
 package com.planner.travel.service;
 
 import com.planner.travel.customException.CustomException;
+import com.planner.travel.dao.UserDAOImpl;
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
 import com.planner.travel.dao.UserDAO;
 import com.planner.travel.utils.UserMapper;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +17,17 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
-    private final UserDAO userRepository;
+    private final UserDAO userDAO;
     private final UserMapper userMapper;
 
 
-    public UserServiceImpl(UserDAO userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
+    @Override
+    public UserDTO findById(Integer id) {
+        return userMapper.toDTO(userDAO.findById(id));
+    }
+
+    public UserServiceImpl(UserDAOImpl userDAOImpl, UserMapper userMapper) {
+        this.userDAO = userDAOImpl;
         this.userMapper = userMapper;
     }
 
@@ -30,25 +35,31 @@ public class UserServiceImpl implements UserService{
 
     private final Map<Integer, User> users = new HashMap<>();
 
+
+
+
     @Transactional
     @Override
     public UserDTO createUser(UserDTO userDTO) {
+        System.out.println("UserServiceImplementation - createUser method - 3");
         User user = userMapper.toEntity(userDTO);
-        user = userRepository.save(user);
+        System.out.println("UserServiceImplementation - toEntity works - 4");
+        user = userDAO.save(user);
+        System.out.println("UserServiceImplementation - toDAO works - 5");
         return userMapper.toDTO(user);
     }
 
     @Override
-    public Optional<UserDTO> getUser(Long id) {
-        return userRepository.findById(id).map(userMapper::toDTO);
+    public Optional<UserDTO> getUser(int id) {
+        return userDAO.findById(Long.valueOf(id)).map(userMapper::toDTO);
     }
 
     @Override
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
-        if (userRepository.existsById(id)) {
+    public UserDTO updateUser(int id, UserDTO userDTO) {
+        if (userDAO.existsById(id)) {
             User user = userMapper.toEntity(userDTO);
             user.setId(id);
-            user = userRepository.save(user);
+            user = userDAO.save(user);
             return userMapper.toDTO(user);
         }
         // Тут можна додати обробку винятків, якщо елемент не знайдено.
@@ -56,36 +67,48 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public void deleteUser(int id) {
+
+    }
+
+    @Override
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        userDAO.deleteById(id);
         throw new CustomException("deleted wrong should be rollback", 500);
 
     }
 
     @Override
     public List<UserDTO> findAllUsers() {
-        return userRepository.findAll()
+        return userDAO.findAll()
                 .stream()
                 .map(userMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public User getById(Integer id) {
+        return null;
+    }
+
     // DAO layer 48.44
     @Override
-    public User getById(int id) {
-        return users.get(id);
+    public Optional<UserDTO> getById(int userId) {
+        return Optional.ofNullable(userMapper.toDTO(userDAO.findById(userId)));
     }
 
-    @Override
-    public User add(User user) {
-        users.put(Math.toIntExact(user.getId()), user);
-        return user;
-    }
 
+    // метод додавання користувача
+//    @Override
+//    public User add(User user) {
+//        users.put(Math.toIntExact(user.getId()), user);
+//        return user;
+//    }
+/*
     @PostConstruct
     public void init() {
         User sergij = User.builder()
-                .id(1L)
+                .id(1)
                 .name("Serhij")
                 .city("Kyiv")
                 .country("Ukraine")
@@ -94,7 +117,7 @@ public class UserServiceImpl implements UserService{
           //      .dob(Date.valueOf("01.01.1995"))
                 .build();
         User vlad = User.builder()
-                .id(2L)
+                .id(2)
                 .name("Vlad")
                 .city("Tokyo")
                 .country("japan")
@@ -104,6 +127,6 @@ public class UserServiceImpl implements UserService{
                 .build();
         users.put(1, sergij);
         users.put(2, vlad);
-    }
+    }*/
 
 }

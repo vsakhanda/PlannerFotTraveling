@@ -1,11 +1,14 @@
 package com.planner.travel.constant;
 
+import lombok.Getter;
+
+@Getter
 public enum Queries {
 
 
     // Додавання користувача POST
     USER_INSERT ("INSERT INTO users " +
-            "(id, name, surname, phone, email, country, city, role ) VALUES (?, ?, ?, ?, ?, ?, ?, ?); "),
+            "( name, surname, phone, email, country, city ) VALUES (?, ?, ?, ?, ?, ?); "),
 
     // Оновлення даних користувача PATCH
     USER_UPDATE("UPDATE users SET name = ?, surname = ?, WHERE id = ?"),
@@ -14,9 +17,12 @@ public enum Queries {
     USER_DELETE("DELETE FROM users WHERE id = ?"),
 
     // пошук користувача FindById
-    USER_FIND_BY("SELECT id"),
+    USER_FIND_BY_ID("SELECT id, name, surname, phone, email, country, city " +
+            "FROM users " +
+            "WHERE id = ?id"),
     // Пошук всіх користувачів FindALL
-    USER_FIND_ALL("SELECT * FROM users"),
+    USER_FIND_ALL("SELECT id, name, surname, phone, email, country, city" +
+            " FROM users"),
     //****
     POINT_INSERT("INSERT INTO"),
     POINT_UPDATE("UPDATE"),
@@ -73,16 +79,11 @@ public enum Queries {
 
 //****
 
-    private String name;
+    private String queryName;
 
-    Queries(String name) {
-        this.name = name;
+    Queries(String queryName) {
+        this.queryName = queryName;
     }
-
-    public String getName() {
-        return name;
-    }
-
 
 
 }

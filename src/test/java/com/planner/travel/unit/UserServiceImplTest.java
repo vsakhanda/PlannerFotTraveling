@@ -55,12 +55,12 @@ public class UserServiceImplTest {
     @Test
     public void testCreateUser() {
         User user = new User();
-        user.setId(1L);
+        user.setId(1);
         user.setEmail("Test");
         user.setName("Serhii");
 
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
+        userDTO.setId(1);
         userDTO.setEmail("Test");
         userDTO.setName("Serhii");
 
@@ -87,24 +87,24 @@ public class UserServiceImplTest {
     @Test
     public void testGetUser() {
         User user = new User();
-        user.setId(1L);
+        user.setId(1);
         user.setEmail("Test");
         user.setName("Serhii");
 
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
+        userDTO.setId(1);
         userDTO.setEmail("Test");
         userDTO.setName("Serhii");
 
         //if UserMapper will be Mock
         //when(userMapper.toDTO(any(User.class))).thenReturn(userDTO);
         //when(userMapper.toEntity(any(UserDTO.class))).thenReturn(user);
-        given(userRepository.findById(1L)).willReturn(Optional.of(user));
+        given(userRepository.findById(Long.valueOf(1))).willReturn(Optional.of(user));
 
-        Optional<UserDTO> resultDTO = userService.getUser(1L);
+        Optional<UserDTO> resultDTO = userService.getUser(1);
 
         assertTrue(resultDTO.isPresent());
-        assertEquals(1L, resultDTO.get().getId());
+        assertEquals(1, resultDTO.get().getId());
 
         // За необхідності можна перевірити виклики методів на шпигуні
         verify(userMapper, times(1)).toDTO(user);

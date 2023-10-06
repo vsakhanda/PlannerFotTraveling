@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.FluentQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -20,12 +21,44 @@ import java.util.function.Function;
 @Qualifier
 public class UserDAOImpl implements UserDAO{
 
-
     private final Connection connection;
 
     public UserDAOImpl() throws SQLException {
         this.connection = DatabaseConnection.getInstance().getConnection();;
     }
+
+    @Override
+    public User findById(Integer id) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_FIND_BY_ID.getQueryName())) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            User user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setName(resultSet.getString("name"));
+            user.setSurname(resultSet.getString("surname"));
+            return user;
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public User save(User user) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_INSERT.getQueryName())) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getCountry());
+            preparedStatement.setString(6, user.getCity());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     @Override
     public List<User> findByNameContaining(String nameFragment) {
         return null;
@@ -42,8 +75,12 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void flush() {
+    public boolean existsById(int id) {
+        return false;
+    }
 
+    @Override
+    public void flush() {
     }
 
     @Override
@@ -62,9 +99,10 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<Long> longs) {
+    public void deleteAllByIdInBatch(Iterable<Long> Longs) {
 
     }
+
 
     @Override
     public void deleteAllInBatch() {
@@ -72,17 +110,17 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User getOne(Long aLong) {
+    public User getOne(Long Long) {
         return null;
     }
 
     @Override
-    public User getById(Long aLong) {
+    public User getById(Long Long) {
         return null;
     }
 
     @Override
-    public User getReferenceById(Long aLong) {
+    public User getReferenceById(Long Long) {
         return null;
     }
 
@@ -111,6 +149,7 @@ public class UserDAOImpl implements UserDAO{
         return 0;
     }
 
+
     @Override
     public <S extends User> boolean exists(Example<S> example) {
         return false;
@@ -121,22 +160,6 @@ public class UserDAOImpl implements UserDAO{
         return null;
     }
 
-//    @Override
-//    public <S extends User> S save(S entity) {
-//        return null;
-//    }
-
-    @Override
-    public User save(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(Queries.USER_INSERT.getName())) {
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getSurname());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
 
     @Override
@@ -145,12 +168,12 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public Optional<User> findById(Long aLong) {
+    public Optional<User> findById(Long Long) {
         return Optional.empty();
     }
 
     @Override
-    public boolean existsById(Long aLong) {
+    public boolean existsById(Long Long) {
         return false;
     }
 
@@ -170,7 +193,7 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(Long Long) {
 
     }
 
