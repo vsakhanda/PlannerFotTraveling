@@ -1,5 +1,6 @@
 package com.planner.travel.service;
 
+import com.planner.travel.customException.CustomException;
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
 import com.planner.travel.repository.UserRepo;
@@ -8,18 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
 public class UserServiceImpl implements UserService{
   //  private final UserDAO userDAO;
-    private final UserRepo UserRepo;
+    private final UserRepo userRepo;
     private final UserMapper userMapper;
 
 
     public UserServiceImpl(UserRepo userRepo, UserMapper userMapper) {
-        this.UserRepo = userRepo;
+        this.userRepo = userRepo;
         this.userMapper = userMapper;
     }
 
@@ -28,97 +31,52 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
-        user = UserRepo.save(user);
+        user = userRepo.save(user);
         return userMapper.toDTO(user);
     }
-//
-//    @Override
-//    public UserDTO findUserById(Integer id) {
-//        return userMapper.toDTO(userDAO.findUserById(id));
-//    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<UserDTO> getUser(int id) {
+        return userRepo.findById(id).map(userMapper::toDTO);
+    }
+
+    @Override
+    public List<UserDTO> findAllUsers() {
+        return userRepo.findAll()
+                .stream()
+                .map(userMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public Optional<UserDTO> getById(int userId) {
         return Optional.empty();
     }
 
+    @Override
+    public boolean deleteUser(int userId) {
+        userRepo.deleteById(userId);
+        throw new CustomException("deleted wrong should be rollback", 500);
+    }
+
+    @Transactional
+    @Override
+    public UserDTO updateUser(int userId, UserDTO userDTO) {
+        if (userRepo.existsById(userId)) {
+            User user = userMapper.toEntity(userDTO);
+            user.setId(userId);
+            user = userRepo.save(user);
+            return userMapper.toDTO(user);
+        }
+        // Тут можна додати обробку винятків, якщо елемент не знайдено.
+        return null;
+    }
 
 
-//    private final Map<Integer, User> users = new HashMap<>();
-//
-   // private final Map<Integer, User> users = new HashMap<>();
-
-
-
-//    @Transactional
-//    @Override
-//    public User createUser(User user) {
-//        User createdUser = userDAO.createUserDAO(user);
-//        return createdUser;
-//    }
-
-//        System.out.println("UserServiceImplementation - createUser method - 3");
-//        User user = userMapper.toEntity(userDTO);
-//        System.out.println("UserServiceImplementation - toEntity works - 4");
-//        user = userDAO.createUserDAO(user);
-//        System.out.println("UserServiceImplementation - toDAO works - 5");
-//        return userMapper.toDTO(userDAO.createUserDAO(user));
-
-//
-//    @Override
-//    public Optional<UserDTO> getUser(int id) {
-//        return userDAO.findById(Long.valueOf(id)).map(userMapper::toDTO);
-//    }
-//
-//    @Override
-//    public UserDTO updateUser(int id, UserDTO userDTO) {
-//        if (userDAO.existsById(id)) {
-//            User user = userMapper.toEntity(userDTO);
-//            user.setId(id);
-//            user = userDAO.save(user);
-//            return userMapper.toDTO(user);
-//        }
-//        // Тут можна додати обробку винятків, якщо елемент не знайдено.
-//        return null;
-//    }
-//
-//    @Override
-//    public void deleteUser(int id) {
-//
-//    }
-//
-//    @Override
-//    public void deleteUser(Long id) {
-//        userDAO.deleteById(id);
-//        throw new CustomException("deleted wrong should be rollback", 500);
-//
-//    }
-//
-//    @Override
-//    public List<UserDTO> findAllUsers() {
-//        return userDAO.findAll()
-//                .stream()
-//                .map(userMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    @Override
-//    public User getById(Integer id) {
-//        return null;
-//    }
-
-    // DAO layer 48.44
-
-
-
-    // метод додавання користувача
-//    @Override
-//    public User add(User user) {
-//        users.put(Math.toIntExact(user.getId()), user);
-//        return user;
-//    }
+  //  @PostConstruct
 /*
-    @PostConstruct
     public void init() {
         User sergij = User.builder()
                 .id(1)
@@ -140,6 +98,7 @@ public class UserServiceImpl implements UserService{
                 .build();
         users.put(1, sergij);
         users.put(2, vlad);
-    }*/
+    }
+*/
 
 }

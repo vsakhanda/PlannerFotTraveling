@@ -1,3 +1,7 @@
+//Deprecated
+
+
+/*
 package com.planner.travel.constant;
 
 import lombok.Getter;
@@ -87,3 +91,4 @@ public enum Queries {
 
 
 }
+*/

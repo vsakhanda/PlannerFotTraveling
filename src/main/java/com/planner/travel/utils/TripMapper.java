@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TripMapper {
 
-    public TripDTO tripToDTO(Trip trip) {
+    public TripDTO toDTO(Trip trip) {
         TripDTO dto = new TripDTO();
         dto.setId(trip.getId());
         dto.setName(trip.getName());
@@ -18,7 +18,7 @@ public class TripMapper {
         return dto;
     }
 
-    public Trip tripToEntity(TripDTO tripDTO) {
+    public Trip toEntity(TripDTO tripDTO) {
         Trip trip = new Trip();
         trip.setId(tripDTO.getId());
         trip.setName(tripDTO.getName());

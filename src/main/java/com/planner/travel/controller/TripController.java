@@ -1,40 +1,71 @@
 package com.planner.travel.controller;
 
-import com.planner.travel.entity.Trip;
+import com.planner.travel.dto.TripDTO;
 import com.planner.travel.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/trips")
 public class TripController {
 
 
-    private final TripService tservice;
+    private final TripService service;
 
     @Autowired
     public TripController(TripService tservice) {
-        this.tservice = tservice;
+        this.service = tservice;
     }
 
-    // POST Додавання подорожей. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
+    // POST Додавання маршрутів. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
+
     @PostMapping("/requestBody")
-    public ResponseEntity<Trip> postUser(@RequestBody Trip trip) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(tservice.add(trip));
+    public ResponseEntity<TripDTO> createRoute(@RequestBody TripDTO tripDTO) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.createTrip(tripDTO));
     }
 
-    // GET Отримання інформації про точку за її ID
-    @GetMapping("/parameter/{tripId}")
-    public ResponseEntity<Trip> getParameter(@PathVariable("tripId") int tripId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(tservice.getById(tripId));
+    //    GET Отримання інформації про коритувача
+    @GetMapping("/get/{Id}")
+    public ResponseEntity<Optional<TripDTO>> getTrip(@PathVariable("Id") int Id) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.get(Id));
+    }
+
+    // GET Отримання інформації про коритувача з описом інформації з URL
+    @GetMapping("/getTrip")
+    public ResponseEntity<Optional<TripDTO>> getPointByRequestParam(@RequestParam("Id") int Id) { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.get(Id));
     }
 
 
-    // GET Отримання інформації про точку за її ID
-    @GetMapping("/requestparameter")
-    public ResponseEntity<Trip> getByRequestParam(@RequestParam("tripId") int tripId) { //@PathVariable - вичитування назви з URL
-        return ResponseEntity.ok(tservice.getById(tripId));
+    @GetMapping("/all")
+    public ResponseEntity<List<TripDTO>> getAllRoutes() { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.findAll());
+    }
+
+    @PatchMapping("/update/{Id}")
+    public ResponseEntity<TripDTO> updateRoute (@PathVariable int Id, @RequestBody TripDTO tripDTO) { //@PathVariable - вичитування назви з URL
+        TripDTO updatedRoute = service.updateTrip(Id, tripDTO);
+        if (updatedRoute != null) {
+            return ResponseEntity.ok(updatedRoute);
+        } else {
+            return ResponseEntity.notFound().build(); // Відповідь зі статусом 404, якщо користувача з таким ID не знайдено.
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{Id}")
+    public ResponseEntity<?> delete(@PathVariable int Id) {
+        boolean deleted = service.delete(Id);
+        if (deleted) {
+            return ResponseEntity.ok().build(); // Відповідь зі статусом 200 OK, якщо користувача видалено.
+        } else {
+            return ResponseEntity.notFound().build(); // Відповідь зі статусом 404 Not Found, якщо користувача з таким ID не знайдено.
+        }
     }
 
     // PUT Оновлення даних про подорож та стан подорожі

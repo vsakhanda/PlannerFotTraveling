@@ -1,13 +1,19 @@
 package com.planner.travel.service;
 
-import com.planner.travel.entity.Point;
+import com.planner.travel.dto.PointDTO;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface PointService {
 
-    Point getById(int id); // must be DTO
 
-    //  UserDTO findById(Integer id); - повинна бути реалізація
-    Point add(Point point);
+    PointDTO createPoint(PointDTO pointSTO);
+    Optional<PointDTO> getPoint(int pointId);
+    List<PointDTO> findAllPoints();
+    PointDTO updatePoint(int userId, PointDTO pointDTO);
+    boolean deletePoint(int pointId);
+    Optional<PointDTO> getPointById(int pointId);
 
 
 }

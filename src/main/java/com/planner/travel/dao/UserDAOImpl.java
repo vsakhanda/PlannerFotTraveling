@@ -1,3 +1,5 @@
+//Deprecated
+
 //package com.planner.travel.dao;
 //
 //import com.planner.travel.constant.DatabaseConnection;
