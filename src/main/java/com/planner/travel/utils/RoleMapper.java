@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleMapper {
 
-    public RoleDTO toDTO(Role role) {
+    public RoleDTO RoleToDTO(Role role) {
         RoleDTO dto = new RoleDTO();
         dto.setId(role.getId());
         dto.setName(role.getName());

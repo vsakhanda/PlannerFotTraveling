@@ -3,18 +3,18 @@ package com.planner.travel.service;
 import com.planner.travel.customException.CustomException;
 import com.planner.travel.dto.AdminUserDTO;
 import com.planner.travel.dto.RoleDTO;
-import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.Role;
 import com.planner.travel.entity.User;
 import com.planner.travel.repository.RoleRepo;
 import com.planner.travel.repository.UserRepo;
 import com.planner.travel.utils.AdminMapper;
 import com.planner.travel.utils.RoleMapper;
-import com.planner.travel.utils.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -64,9 +64,17 @@ public class AdminServiceImpl implements AdminService {
     public RoleDTO createRole(RoleDTO roleDTO) {
         Role role = roleMapper.toEntity(roleDTO);
         role = roleRepo.save(role);
-        return roleMapper.toDTO(role);
+        return roleMapper.RoleToDTO(role);
     }
 
+    @Override
+    public List<AdminUserDTO> findAll() {
+
+        List<User> users = userRepo.findAll();
+        return users.stream()
+                .map(adminMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
 }
 

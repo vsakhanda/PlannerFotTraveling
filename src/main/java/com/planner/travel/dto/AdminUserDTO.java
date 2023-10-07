@@ -1,5 +1,6 @@
 package com.planner.travel.dto;
 
+import com.planner.travel.entity.Role;
 import lombok.*;
 
 import java.util.List;
@@ -20,5 +21,6 @@ public class AdminUserDTO {
     private String phone;
     private String country;
     private String city;
+    //private String role;
     private List<RoleDTO> roleList;
 }

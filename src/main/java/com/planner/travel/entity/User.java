@@ -29,7 +29,7 @@ public class User implements Serializable {
     private String email;
     private String country;
     private String city;
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles", schema = "advanced_robot_dreams",
             joinColumns = {

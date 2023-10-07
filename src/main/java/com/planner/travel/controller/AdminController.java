@@ -59,10 +59,10 @@ public class AdminController {
         return ResponseEntity.ok(service.createRole(roleDTO));
     }
 
-//
-//    @GetMapping("/allUsers")
-//    public ResponseEntity<List<UserDTO>> getAllUsers() { //@PathVariable - вичитування назви з URL
-//        return ResponseEntity.ok(service.findAllUsers());
-//    }
+
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<AdminUserDTO>> getAllUsers() { //@PathVariable - вичитування назви з URL
+        return ResponseEntity.ok(service.findAll());
+    }
 
 }
