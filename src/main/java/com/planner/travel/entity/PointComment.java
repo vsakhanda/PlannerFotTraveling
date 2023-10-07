@@ -10,8 +10,8 @@ import java.util.Date;
 @Builder
 @Getter
 @Setter
-@Entity
-@Table
+//@Entity
+//@Table
 public class PointComment {
 
     @Column
@@ -23,5 +23,6 @@ public class PointComment {
     private String user_id;
     private Date timestamp;
     private boolean is_deleted;
+
 
 }

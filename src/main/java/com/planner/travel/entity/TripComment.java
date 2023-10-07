@@ -10,8 +10,8 @@ import java.util.Date;
 @Builder
 @Getter
 @Setter
-@Entity
-@Table
+//@Entity
+// @Table
 public class TripComment {
 
     @Column

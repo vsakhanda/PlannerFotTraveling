@@ -4,6 +4,8 @@ package com.planner.travel.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +21,5 @@ public class RouteDTO {
         private String description;
         private boolean is_private;
         private boolean is_round_route;
+        private List<RoleDTO> roleList;
 }

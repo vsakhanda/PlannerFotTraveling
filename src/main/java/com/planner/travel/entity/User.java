@@ -1,10 +1,13 @@
 package com.planner.travel.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,22 +29,23 @@ public class User implements Serializable {
     private String email;
     private String country;
     private String city;
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles", schema = "advanced_robot_dreams",
+            joinColumns = {
+                    @JoinColumn(
+                            name = "user_id",
+                            nullable = false
+                    )
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "role_id",
+                            nullable = false
+                    )
+            }
+    )
+  //  @JsonIgnore
+    private List<Role> roleList = new ArrayList<>();
 
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_roles",
-//            joinColumns = {
-//                    @JoinColumn(
-//                            name = "user_id",
-//                            nullable = false
-//                    )
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(
-//                            name = "role_id",
-//                            nullable = false
-//                    )
-//            }
-//    )
 }
