@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TravelPlanner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul class="top-menu">
+      <li><a href="#">Головна</a></li>
+      <li><a href="#">Про нас</a></li>
+      <li><a href="points.html">Цікаві місця</a></li>
+      <li><a href="routes.html">Цікаві маршрути</a></li>
+<!--      <li><a href="trips.html">Цікаві подорожі</a></li>-->
+      <li><a href="#">Запланувати подорож</a></li>
+    </ul>
+  </nav>
+</header>
+<main class="page">
+  <section class="section-1">
+    <div class="left-half">
+      <!-- Форма для додавання нових місць -->
+      <h2>Запланувати подорож</h2>
+      <div id="addPlaceForm">
+        <form action="/plan-trip" method="post">
+          <!-- Реквізити та опис місця -->
+          <div class="input-container">
+            <label for="name">Кодова назва подорожі</label>
+            <input type="text" id="name" name="Name" required><br>
+          </div>
+          <div class="input-container">
+            <label for="description">Опис подорожі та очікування</label>
+            <input type="text" id="description" name="description" required><br>
+          </div>
+
+
+          <div class="input-container">
+          <label for="startDate">Дата початку:</label>
+          <input type="date" id="startDate" name="startDate" required><br>
+          </div>
+
+          <div class="input-container">
+          <label for="endDate">Дата закінчення:</label>
+          <input type="date" id="endDate" name="endDate" required><br>
+          </div>
+
+          <div class="input-container">
+          <label for="travelers">Кількість осіб:</label>
+          <input type="number" id="travelers" name="travelers" required><br>
+          </div>
+
+
+          <button type="submit">Запланувати подорож</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="right-half">
+      <h2>Мої подорожі</h2>
+      <section class="my-places">
+        <div class="my-places-column">
+          <!-- Вміст для першої частини "Створені мною" -->
+          <h2>Створені мною</h2>
+          <ul>
+            <!-- Місця, створені користувачем, відобразіть тут -->
+            <li>Подорож 1</li>
+            <li>Подорож 2</li>
+            <!-- Додайте більше місць за потреби -->
+          </ul>
+        </div>
+        <div class="my-places-column">
+          <!-- Вміст для другої частини "Всі місця" -->
+          <h2>Всі подорожі</h2>
+          <input type="text" placeholder="Пошук">
+          <ul>
+            <!-- Всі місця, відобразіть тут -->
+            <li>Подорожі 1</li>
+            <li>Подорожі 2</li>
+            <!-- Додайте більше місць за потреби -->
+          </ul>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section-2">
+    <h2>Карта</h2>
+    <div id="map">
+      <!-- Карта буде відображена тут -->
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2023 Odyssey's company. Усі права захищено.</p>
+</footer>
+
+</body>
+</html>
+
+

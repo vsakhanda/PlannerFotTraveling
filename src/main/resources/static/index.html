@@ -3,87 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>TravelPlanner</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<header>
+    <nav>
+        <ul class="top-menu">
+            <li><a href="#">Головна</a></li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="points.html">Цікаві місця</a></li>
+            <li><a href="routes.html">Цікаві маршрути</a></li>
+<!--            <li><a href="trips.html">Цікаві подорожі</a></li>-->
+            <li><a href="trips.html">Запланувати подорож</a></li>
+        </ul>
+    </nav>
+</header>
 
-<div style="width: 320px; height: 1000px; padding-top: 16px; padding-bottom: 8px; background: #ffffff; border-right: 1px #2f2f95 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-    <div style="align-self: stretch; flex: 1 1 0; flex-direction: column; justify-content: space-between; align-items: flex-start; display: flex">
-        <div style="align-self: stretch; height: 240px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 44px; display: flex">
-            <div style="align-self: stretch; height: 36px; padding-left: 20px; padding-right: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 21.30px; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 12px; display: flex">
-                        <div style="width: 36px; height: 36px; padding: 3.60px; justify-content: center; align-items: center; display: flex">
-                            <img style="width: 28.80px; height: 28.80px; border-radius: 60px" src="https://via.placeholder.com/29x29" />
-                        </div>
-                        <div style="color: #110C22; font-size: 32px; font-family: SF Pro; font-weight: 650; line-height: 40px; word-wrap: break-word">coinsys</div>
-                    </div>
-                </div>
-            </div>
-            <div style="align-self: stretch; height: 160px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="align-self: stretch; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: #F1EEFF; border-radius: 12px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                        <div style="width: 20px; height: 20px; position: relative">
-                            <img style="width: 16.67px; height: 15px; left: 1.67px; top: 2.50px; position: absolute" src="https://via.placeholder.com/17x15" />
-                        </div>
-                        <div style="flex: 1 1 0; color: #7357FF; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Точки</div>
-                    </div>
-                </div>
-                <div style="align-self: stretch; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: rgba(255, 255, 255, 0); border-radius: 12px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                        <div style="width: 20px; height: 20px; position: relative">
-                            <img style="width: 13.33px; height: 16.67px; left: 3.33px; top: 1.67px; position: absolute" src="https://via.placeholder.com/13x17" />
-                        </div>
-                        <div style="flex: 1 1 0; color: #4F4B5C; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Маршрути</div>
-                        <div style="width: 31px; height: 24px; position: relative"></div>
-                    </div>
-                </div>
-                <div style="align-self: stretch; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: rgba(255, 255, 255, 0); border-radius: 12px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                        <div style="width: 20px; height: 20px; position: relative">
-                            <img style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute" src="https://via.placeholder.com/15x15" />
-                        </div>
-                        <div style="flex: 1 1 0; color: #4F4B5C; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Подорожі</div>
-                    </div>
-                </div>
-                <div style="align-self: stretch; height: 40px; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: rgba(255, 255, 255, 0); border-radius: 12px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                        <div style="width: 20px; height: 20px; position: relative">
-                            <div style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute; background: #4F4B5C"></div>
-                        </div>
-                        <div style="flex: 1 1 0; color: #4F4B5C; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">ЩОСЬ НОВЕ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="align-self: stretch; height: 436px; flex-direction: column; justify-content: flex-end; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; height: 280px; padding-left: 24px; padding-right: 24px; padding-top: 32px; padding-bottom: 32px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                <div style="align-self: stretch; height: 216px; padding: 24px; background: white; box-shadow: 0px 6px 16px -6px rgba(17, 12, 34, 0.10); border-radius: 16px; overflow: hidden; border: 1px #F3F3F4 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                    <div style="align-self: stretch; color: #110C22; font-size: 18px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Подорожуй з нами!</div>
-                    <div style="align-self: stretch; color: #4F4B5C; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Всі подорожі виконуються професіоналами!</div>
-                    <div style="align-self: stretch; height: 56px; padding-top: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                        <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: #7357FF; box-shadow: 0px 1px 2px -1px rgba(17, 12, 34, 0.08); border-radius: 8px; overflow: hidden; justify-content: center; align-items: center; gap: 8px; display: inline-flex">
-                            <div style="color: white; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">ДИВИНА</div>
-                            <div style="width: 18px; height: 18px; position: relative">
-                                <div style="width: 10.60px; height: 10.60px; left: 3.84px; top: 3.56px; position: absolute; background: white"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="align-self: stretch; height: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 319px; height: 0px; border: 1px #F3F3F4 solid"></div>
-            </div>
-            <div style="align-self: stretch; height: 40px; padding-left: 8px; padding-right: 8px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: rgba(255, 255, 255, 0); border-radius: 12px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                    <div style="width: 20px; height: 20px; position: relative">
-                        <img style="width: 13.33px; height: 16.92px; left: 3.33px; top: 1.54px; position: absolute" src="https://via.placeholder.com/13x17" />
-                    </div>
-                    <div style="flex: 1 1 0; color: #4F4B5C; font-size: 14px; font-family: General Sans; font-weight: 600; line-height: 24px; word-wrap: break-word">Support</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<main class="page">
+    <section>
+        <h1>Ласкаво просимо на наш сайт!</h1>
+        <h1>Призначення сервісу:</h1>
+        <ul class="main-page">
+        <li> Знаходити цікаві місця для подорожі
+        <li> Планувати власні маршрути з цікавими вам місцями.
+        <li>Планувати подорожі
+        <li> Та ділитись інформацією, враженнями та емоціями !
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2023 Odyssey's company. Усі права захищено.</p>
+</footer>
 
 </body>
 </html>

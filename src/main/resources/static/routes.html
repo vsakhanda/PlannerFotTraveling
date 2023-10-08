@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TravelPlanner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul class="top-menu">
+      <li><a href="#">Головна</a></li>
+      <li><a href="#">Про нас</a></li>
+      <li><a href="points.html">Цікаві місця</a></li>
+      <li><a href="routes.html">Цікаві маршрути</a></li>
+<!--      <li><a href="trips.html">Цікаві подорожі</a></li>-->
+      <li><a href="trips.html">Запланувати подорож</a></li>
+    </ul>
+  </nav>
+</header>
+<main class="page">
+  <section class="section-1">
+    <div class="left-half">
+      <!-- Форма для додавання нових місць -->
+      <h2>Додати новий маршрут</h2>
+      <div id="addPlaceForm">
+        <form action="/plan-trip" method="post">
+          <!-- Реквізити та опис місця -->
+          <div class="input-container">
+            <label for="name">Назва</label>
+            <input type="text" id="name" name="Name" required><br>
+          </div>
+          <div class="input-container">
+            <label for="description">Опис</label>
+            <input type="text" id="description" name="description" required><br>
+          </div>
+
+          <button type="submit">Додати маршрут</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="right-half">
+      <h2>Мої маршрути</h2>
+      <section class="my-places">
+        <div class="my-places-column">
+          <!-- Вміст для першої частини "Створені мною" -->
+          <h2>Створені мною</h2>
+          <ul>
+            <!-- Місця, створені користувачем, відобразіть тут -->
+            <li>Маршрут 1</li>
+            <li>Маршрут 2</li>
+            <!-- Додайте більше місць за потреби -->
+          </ul>
+        </div>
+        <div class="my-places-column">
+          <!-- Вміст для другої частини "Всі місця" -->
+          <h2>Всі доступні маршрути</h2>
+          <input type="text" placeholder="Пошук маршрутів">
+          <ul>
+            <!-- Всі місця, відобразіть тут -->
+            <li>Маршрут 1</li>
+            <li>Маршрут 2</li>
+            <!-- Додайте більше місць за потреби -->
+          </ul>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section-2">
+    <h2>Карта</h2>
+    <div id="map">
+      <!-- Карта буде відображена тут -->
+    </div>
+  </section>
+</main>
+</body>
+
+<footer>
+  <p>&copy; 2023 Odyssey's company. Усі права захищено.</p>
+</footer>
+</html>
+
+
