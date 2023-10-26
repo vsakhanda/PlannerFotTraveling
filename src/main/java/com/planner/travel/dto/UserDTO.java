@@ -19,4 +19,5 @@ public class UserDTO {
         private String phone;
         private String country;
         private String city;
+        // records - next step (ENUM)
 }

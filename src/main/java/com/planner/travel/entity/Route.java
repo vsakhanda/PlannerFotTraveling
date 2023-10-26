@@ -20,10 +20,11 @@ public class Route {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-//    @ManyToOne
-//    @JoinTable (name = "User")
-//    @JoinColumn (name = "id")
-    private int author;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable (name = "author")
+    private User author;
     private String description;
 //    private String startpoint;
 //    private String endpoint;

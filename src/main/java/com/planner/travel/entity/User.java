@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 @ToString
-@Data
+@Data // Better to use  (read FYI)
 @Table (name = "users")
 public class User implements Serializable {
 
@@ -29,6 +29,7 @@ public class User implements Serializable {
     private String email;
     private String country;
     private String city;
+    // Cascade type - @many to many
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles", schema = "advanced_robot_dreams",

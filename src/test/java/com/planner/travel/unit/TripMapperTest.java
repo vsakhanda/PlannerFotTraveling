@@ -25,7 +25,7 @@ public class TripMapperTest {
         trip.setName("Trip1");
 
         //Дія
-        TripDTO dto = tripMapper.tripToDTO(trip);
+        TripDTO dto = tripMapper.toDTO(trip);
 
         //Перевірка
         assertEquals(1L, dto.getId());
@@ -41,7 +41,7 @@ public class TripMapperTest {
         dto.setName("Trip2");
 
         // Дія
-        Trip trip = tripMapper.tripToEntity(dto);
+        Trip trip = tripMapper.toEntity(dto);
 
         // Перевірка
         assertEquals(1L, trip.getId());

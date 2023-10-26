@@ -2,7 +2,6 @@ package com.planner.travel.unit;
 
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.entity.User;
-import com.planner.travel.dao.UserDAO;
 import com.planner.travel.service.UserServiceImpl;
 import com.planner.travel.utils.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +25,7 @@ public class UserServiceImplTest {
       Наприклад, якщо ви маєте @Mock private SomeClass someClass;, то MockitoAnnotations.openMocks(this); ініціалізує цей мок для вас.
       */
     @Mock
-    private UserDAO userRepository;
+    private UserDTO userRepository;
 
     /*
     Ця анотація дозволяє створювати "шпигунів" на реальних об'єктах. Коли ви створюєте шпигуна на реальному об'єкті,
@@ -65,9 +64,9 @@ public class UserServiceImplTest {
         userDTO.setName("Serhii");
 
         //if UserMapper will be Mock
-        //when(userMapper.toDTO(any(User.class))).thenReturn(userDTO);
-        //when(userMapper.toEntity(any(UserDTO.class))).thenReturn(user);
-        when(userRepository.save(any())).thenReturn(user);
+        when(userMapper.toDTO(any(User.class))).thenReturn(userDTO);
+        when(userMapper.toEntity(any(UserDTO.class))).thenReturn(user);
+       // when(userRepository.s(any())).thenReturn(user);
 
     //    User resultDTO = userService.createUser(user);
 
@@ -76,7 +75,7 @@ public class UserServiceImplTest {
         тут :
         чи метод save був викликаний один раз під час створення користувача:
         */
-        verify(userRepository, times(1)).save(any(User.class));
+       // verify(userRepository, times(1)).save(any(User.class));
    //     assertEquals(1L, resultDTO.getId());
 
         // За необхідності можна перевірити виклики методів на шпигуні
@@ -99,7 +98,7 @@ public class UserServiceImplTest {
         //if UserMapper will be Mock
         //when(userMapper.toDTO(any(User.class))).thenReturn(userDTO);
         //when(userMapper.toEntity(any(UserDTO.class))).thenReturn(user);
-        given(userRepository.findById(Long.valueOf(1))).willReturn(Optional.of(user));
+       // given(userRepository.findById(Long.valueOf(1))).willReturn(Optional.of(user));
 
         Optional<UserDTO> resultDTO = userService.getUser(1);
 

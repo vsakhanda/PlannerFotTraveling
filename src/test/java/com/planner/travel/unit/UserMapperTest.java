@@ -21,7 +21,7 @@ public class UserMapperTest {
        public void testToDTO() {
         //Підготовка
         User user = new User();
-        user.setId(1L);
+        user.setId(1);
         user.setName("Serhij");
         user.setEmail("abcd@gmail.com");
         user.setSurname("Abcding");
@@ -35,7 +35,7 @@ public class UserMapperTest {
         UserDTO dto = userMapper.toDTO(user);
 
         //Перевірка
-        assertEquals(1L, dto.getId());
+        assertEquals(1, dto.getId());
         assertEquals("Serhij", dto.getName());
         assertEquals("Abcding", dto.getSurname());
         assertEquals("abcd@gmail.com", dto.getEmail());
@@ -50,7 +50,7 @@ public class UserMapperTest {
     public void testToEntity() {
         // Підготовка
         UserDTO dto = new UserDTO();
-        dto.setId(1L);
+        dto.setId(1);
         dto.setName("Alex");
         dto.setEmail("abcd@gmail.com");
         dto.setSurname("Example.com");

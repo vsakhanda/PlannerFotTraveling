@@ -3,6 +3,7 @@ package com.planner.travel.controller;
 
 import com.planner.travel.dto.UserDTO;
 import com.planner.travel.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,47 +13,46 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 @RestController
 @RequestMapping ("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 
 
     private final UserService service;
 
-    @Autowired
-    public UserController(UserService service) {
-        this.service = service;
-    }
 
     // POST Додавання користувача. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
-
-    @PostMapping("/requestBody")
+// можна не додавати маппінг для пост.
+    @PostMapping()
     public ResponseEntity<UserDTO> createUser (@RequestBody UserDTO userDTO) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.createUser(userDTO));
     }
 
- //    GET Отримання інформації про коритувача
-    @GetMapping("/getDirectUser/{userId}")
+ //    GET Отримання інформації про кориcтувача
+    @GetMapping("/{userId}")
     public ResponseEntity<Optional<UserDTO>> getUser(@PathVariable("userId") int userId) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.getUser(userId));
     }
 
-    // GET Отримання інформації про коритувача з описом інформації з URL
+    // GET Отримання інформації про кориcтувача з описом інформації з URL
     @GetMapping("/getUser")
     public ResponseEntity<Optional<UserDTO>> getUserByRequestParam(@RequestParam("userId") int userId) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.getUser(userId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/allUsers")
     public ResponseEntity<List<UserDTO>> getAllUsers() { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.findAllUsers());
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PatchMapping("/updateUser/{userId}")
+    @PutMapping("/updateUser/{userId}")
     public ResponseEntity<UserDTO> updateUser (@PathVariable int userId, @RequestBody UserDTO userDTO) { //@PathVariable - вичитування назви з URL
         UserDTO updatedUser = service.updateUser(userId, userDTO);
+        // Сервіс Опціональний тернарний вираз.
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         } else {

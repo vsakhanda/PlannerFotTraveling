@@ -25,7 +25,7 @@ public class TripController {
     // POST Додавання маршрутів. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
 
     @PostMapping("/requestBody")
-    public ResponseEntity<TripDTO> createRoute(@RequestBody TripDTO tripDTO) { //@PathVariable - вичитування назви з URL
+    public ResponseEntity<TripDTO> createTrip(@RequestBody TripDTO tripDTO) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.createTrip(tripDTO));
     }
 

@@ -26,7 +26,7 @@ public class RouteMapperTest {
         route.setName("Route1");
 
         //Дія
-        RouteDTO dto = routeMapper.routeToDTO(route);
+        RouteDTO dto = routeMapper.toDTO(route);
 
         //Перевірка
         assertEquals(1, dto.getId());
@@ -43,7 +43,7 @@ public class RouteMapperTest {
         dto.setName("Route2");
 
         // Дія
-        Route trip = routeMapper.routeToEntity(dto);
+        Route trip = routeMapper.toEntity(dto);
 
         // Перевірка
         assertEquals(1, trip.getId());

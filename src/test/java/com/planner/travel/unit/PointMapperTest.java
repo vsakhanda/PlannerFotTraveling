@@ -26,7 +26,7 @@ public class PointMapperTest {
         point.setName("Point1");
 
         //Дія
-        PointDTO dto = pointMapper.pointToDTO(point);
+        PointDTO dto = pointMapper.toDTO(point);
 
         //Перевірка
         assertEquals(1, dto.getId());
@@ -43,7 +43,7 @@ public class PointMapperTest {
         dto.setName("Point2");
 
         // Дія
-        Point point = pointMapper.pointToEntity(dto);
+        Point point = pointMapper.toEntity(dto);
 
         // Перевірка
         assertEquals(1, point.getId());

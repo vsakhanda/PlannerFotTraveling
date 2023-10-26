@@ -24,7 +24,7 @@
     <!-- Форма для додавання нових місць -->
     <h2>Додати нове місце</h2>
     <div id="addPlaceForm">
-      <form action="/plan-trip" method="post">
+      <form id="placeForm" >
       <!-- Реквізити та опис місця -->
         <div class="input-container">
           <label for="name">Назва</label>
@@ -60,6 +60,35 @@
         </div>
         <button type="submit">Додати місце</button>
       </form>
+
+      <script>
+        // Функція для відправки даних на сервер
+        function sendPlaceData() {
+          const form = document.getElementById("placeForm");
+          const formData = new FormData(form);
+
+          // Відправка запиту POST на сервер
+          fetch("http://localhost:8080/api/v1/points/requestBody", {
+            method: "POST",
+            body: formData
+          })
+                  .then(response => response.json())
+                  .then(responseData => {
+                    // Обробка відповіді від сервера
+                    console.log("Відповідь від сервера:", responseData);
+                    // Виконайте подальші дії з відповіддю, які вам потрібні
+                  })
+                  .catch(error => {
+                    console.error("Помилка під час відправки запиту:", error);
+                    // Обробка помилок під час відправки запиту
+                  });
+        }
+        // Додайте обробник події для форми
+        document.getElementById("placeForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Забороняємо стандартну поведінку форми
+          sendPlaceData();
+        });
+      </script>
 
   </div>
   </div>
@@ -104,6 +133,8 @@
 <footer>
   <p>&copy; 2023 Odyssey's company. Усі права захищено.</p>
 </footer>
+
+
 </html>
 
 
