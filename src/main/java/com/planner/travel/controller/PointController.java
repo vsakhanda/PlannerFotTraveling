@@ -12,6 +12,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/points")
 public class PointController {
 
@@ -24,13 +25,13 @@ public class PointController {
 
         // POST Додавання точки. В тілі запиту передаємо модель з інформацією про користувача. Після додаваня користувача він повинен з'явитись в базі
 
-    @PostMapping("/requestBody")
+    @PostMapping("/addPoint")
     public ResponseEntity<PointDTO> createPoint (@RequestBody PointDTO pointDTO) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.createPoint(pointDTO));
     }
 
     //    GET Отримання інформації про коритувача
-    @GetMapping("/get/{Id}")
+    @GetMapping("/{Id}")
     public ResponseEntity<Optional<PointDTO>> getPoint(@PathVariable("Id") int Id) { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.getPoint(Id));
     }
@@ -41,8 +42,7 @@ public class PointController {
         return ResponseEntity.ok(service.getPoint(Id));
     }
 
-
-    @GetMapping("/all")
+    @GetMapping("/getPoints")
     public ResponseEntity<List<PointDTO>> getAllPoints() { //@PathVariable - вичитування назви з URL
         return ResponseEntity.ok(service.findAllPoints());
     }
@@ -58,7 +58,7 @@ public class PointController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/delete/{Id}")
+    @DeleteMapping("/{Id}")
     public ResponseEntity<?> delete(@PathVariable int Id) {
         boolean deleted = service.deletePoint(Id);
         if (deleted) {

@@ -14,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +39,8 @@ public class SecurityConfig {
                         (authorize) ->
                                 authorize
                                         .requestMatchers("/api/v1/users/public").permitAll()
+                                        .requestMatchers("/api/v1/points/getPoints").permitAll()
+                                        .requestMatchers("/api/v1/points/2").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
@@ -50,5 +57,20 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(vlad,admin);
     }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Allow requests from this origin
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowCredentials(true); // Enable credentials (e.g., cookies)
+        configuration.addAllowedHeader("*"); // You can customize this to specific headers
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
 }
 
